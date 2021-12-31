@@ -1,0 +1,6 @@
+<effect>
+<name>AND</name>
+<description>Bitwise AND the colors with the background. Note: Bitwise ops are not supported in DX9.</description>
+<BackgroundTexture>1</BackgroundTexture>
+</effect>
+
