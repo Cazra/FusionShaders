@@ -1,0 +1,5 @@
+<effect>
+<name>XOR</name>
+<description>Bitwise XOR the colors with the background.</description>
+<BackgroundTexture>1</BackgroundTexture>
+</effect>

@@ -1,0 +1,5 @@
+<effect>
+<name>OR</name>
+<description>Bitwise OR the colors with the background.</description>
+<BackgroundTexture>1</BackgroundTexture>
+</effect>

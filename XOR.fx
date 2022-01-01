@@ -47,16 +47,16 @@ int BYTE2int(in BYTE x) {
   return Out;
 }
 
-BYTE bitwiseAND(in BYTE x, in BYTE y) {
+BYTE bitwiseXOR(in BYTE x, in BYTE y) {
   BYTE Out;
-  Out.bit0 = x.bit0 && y.bit0;
-  Out.bit1 = x.bit1 && y.bit1;
-  Out.bit2 = x.bit2 && y.bit2;
-  Out.bit3 = x.bit3 && y.bit3;
-  Out.bit4 = x.bit4 && y.bit4;
-  Out.bit5 = x.bit5 && y.bit5;
-  Out.bit6 = x.bit6 && y.bit6;
-  Out.bit7 = x.bit7 && y.bit7;
+  Out.bit0 = (x.bit0 || y.bit0) && !(x.bit0 && y.bit0);
+  Out.bit1 = (x.bit1 || y.bit1) && !(x.bit1 && y.bit1);
+  Out.bit2 = (x.bit2 || y.bit2) && !(x.bit2 && y.bit2);
+  Out.bit3 = (x.bit3 || y.bit3) && !(x.bit3 && y.bit3);
+  Out.bit4 = (x.bit4 || y.bit4) && !(x.bit4 && y.bit4);
+  Out.bit5 = (x.bit5 || y.bit5) && !(x.bit5 && y.bit5);
+  Out.bit6 = (x.bit6 || y.bit6) && !(x.bit6 && y.bit6);
+  Out.bit7 = (x.bit7 || y.bit7) && !(x.bit7 && y.bit7);
   return Out;
 }
 
@@ -83,9 +83,9 @@ PS_OUTPUT ps_main( in PS_INPUT In ) {
     BYTE fgByteG = int2BYTE((int) (fg.g * 255));
     BYTE fgByteB = int2BYTE((int) (fg.b * 255));
 
-    BYTE outByteR = bitwiseAND(bgByteR, fgByteR);
-    BYTE outByteG = bitwiseAND(bgByteG, fgByteG);
-    BYTE outByteB = bitwiseAND(bgByteB, fgByteB);
+    BYTE outByteR = bitwiseXOR(bgByteR, fgByteR);
+    BYTE outByteG = bitwiseXOR(bgByteG, fgByteG);
+    BYTE outByteB = bitwiseXOR(bgByteB, fgByteB);
 
     Out.Color.r = BYTE2int(outByteR) / 255.0f;
     Out.Color.g = BYTE2int(outByteG) / 255.0f;
