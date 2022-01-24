@@ -89,15 +89,24 @@ PS_OUTPUT ps_main( in PS_INPUT In ) {
     uv = mul(translate(camX/srcWidth, camY/srcHeight), uv);
 
     // Image wrapping
+    bool oob = false;
     float2 uv2 = float2(uv.x % 1.0f, uv.y % 1.0f);
-    if (uv2.x < 0.0f)
+    if ((wrapMode & 0x01) == 0 && (uv.x < 0.0f || uv.x > 1.0f))
+      oob = true;
+    else if (uv2.x < 0.0f)
       uv2.x = 1.0f + uv2.x;
-    if (uv2.y < 0.0f)
+
+    if ((wrapMode & 0x02) == 0 && (uv.y < 0.0f || uv.y > 1.0f))
+      oob = true;
+    else if (uv2.y < 0.0f)
       uv2.y = 1.0f + uv2.y;
 
     // Get the pixel from the source image. If its alpha is 0, just use the
     // background graphic.
     float4 imgColor = tex2D(srcImage, uv2.xy);
+    if (oob)
+      imgColor.a = 0.0f;
+
     if (imgColor.a > 0.0f)
       Out.Color.rgba = imgColor;
     else
