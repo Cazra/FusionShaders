@@ -80,7 +80,7 @@ PS_OUTPUT ps_main( in PS_INPUT In ) {
 
     Out.Color.rgba = fg.rgba;
     if (dist > tolerance * tolerance)
-      Out.Color.a = 0.0f;
+      Out.Color.rgba = 0.0f;
 
     return Out;
 }
