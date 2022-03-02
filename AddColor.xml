@@ -1,0 +1,14 @@
+<effect>
+  <name>Add Color</name>
+  <description>
+    Add the color components of the given color to the source image.
+  </description>
+  <parameter>
+    <name>Color</name>
+    <code>color</code>
+    <description>The color to be added.</description>
+    <type>int_float4</type>
+    <property>COLOR</property>
+    <value>0.0</value>
+  </parameter>
+</effect>
