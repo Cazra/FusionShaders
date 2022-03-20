@@ -11,20 +11,23 @@ struct PS_OUTPUT {
 };
 
 // Global variables
-sampler2D Tex0; // Used as backdrop, which is only visible through transparent pixels of srcImage.
+sampler2D Tex0;
+sampler2D bgTex : register(s1);
 
 // PS_VARIABLES
 float4 color;
+float semitransparency;
 
 PS_OUTPUT ps_main( in PS_INPUT In ) {
     // Output pixel
     PS_OUTPUT Out;
 
     float4 srcColor = tex2D(Tex0, In.Texture);
+    float4 bg = tex2D(bgTex, In.Texture);
 
-    Out.Color.rgba = float4(srcColor.r + color.r,
-                            srcColor.g + color.g,
-                            srcColor.b + color.b,
+    Out.Color.rgba = float4((srcColor.r + color.r) * (1.0 - semitransparency) + bg.r * semitransparency,
+                            (srcColor.g + color.g) * (1.0 - semitransparency) + bg.r * semitransparency,
+                            (srcColor.b + color.b) * (1.0 - semitransparency) + bg.r * semitransparency,
                             srcColor.a);
     return Out;
 }

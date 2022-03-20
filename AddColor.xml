@@ -11,4 +11,12 @@
     <property>COLOR</property>
     <value>0.0</value>
   </parameter>
+  <parameter>
+    <name>Semitransparency</name>
+    <code>semitransparency</code>
+    <description>Semitransparency, for applications with premultiplied alphas disabled. Set to 0 for opaque or 1 for fully transparent.</description>
+    <type>FLOAT</type>
+    <value>0.0</value>
+  </parameter>
+  <BackgroundTexture>1</BackgroundTexture>
 </effect>
