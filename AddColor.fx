@@ -17,6 +17,7 @@ sampler2D bgTex : register(s1);
 // PS_VARIABLES
 float4 color;
 float semitransparency;
+int inverted;
 
 PS_OUTPUT ps_main( in PS_INPUT In ) {
     // Output pixel
@@ -29,6 +30,11 @@ PS_OUTPUT ps_main( in PS_INPUT In ) {
                             (srcColor.g + color.g) * (1.0 - semitransparency) + bg.r * semitransparency,
                             (srcColor.b + color.b) * (1.0 - semitransparency) + bg.r * semitransparency,
                             srcColor.a);
+
+    if (inverted != 0) {
+      Out.Color.rgb = 1.0 - Out.Color.rgb;
+    }
+
     return Out;
 }
 
